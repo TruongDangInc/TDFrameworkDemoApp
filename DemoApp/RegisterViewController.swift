@@ -6,37 +6,28 @@
 //              /_/ /_/   \__,_/\____/_/ /_/\__, /         /_____/\__,_/_/ /_/\__, /
 //                                         /____/                            /____/
 //
-//  MainViewController.swift
+//  RegisterViewController.swift
 //  DemoApp
 //
-//  Created by Đặng Văn Trường on 14/12/2020.
+//  Created by Đặng Văn Trường on 15/12/2020.
 //  Copyright (c) 2020 TruongDang Inc. All rights reserved.
 //
 
 import UIKit
+import TDFramework
 
-class MainViewController: UIViewController {
+class RegisterViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
+
         // Do any additional setup after loading the view.
     }
 
     @IBAction func registerButtonDidTouch() {
-        
-        performSegue(withIdentifier: "presentRegisterViewController", sender: self)
-    }
-
-    @IBAction func loginButtonDidTouch() {
-        
-        performSegue(withIdentifier: "presentLoginViewController", sender: self)
-    }
-
-    @IBAction func historyButtonDidTouch() {
-        performSegue(withIdentifier: "presentHistoryViewController", sender: self)
-    }
-
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        debugPrint("present \(segue.destination.debugDescription)")
+        dismiss(animated: true) {
+            TDServices.shared.registerAccout(withUserName: "userNameLabel", password: "passLabel")
+            debugPrint("RegisterViewController dismissed")
+        }
     }
 }

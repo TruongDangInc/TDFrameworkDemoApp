@@ -6,22 +6,17 @@
 //              /_/ /_/   \__,_/\____/_/ /_/\__, /         /_____/\__,_/_/ /_/\__, /
 //                                         /____/                            /____/
 //
-//  LoginViewController.swift
-//  DemoApp
+//  TDFramework.h
+//  TDFramework
 //
-//  Created by Đặng Văn Trường on 15/12/2020.
+//  Created by Đặng Văn Trường on 14/12/2020.
 //  Copyright (c) 2020 TruongDang Inc. All rights reserved.
 //
 
-import UIKit
-import TDFramework
+#import <Foundation/Foundation.h>
 
-class LoginViewController: UIViewController {
+//! Project version number for TDFramework.
+FOUNDATION_EXPORT double TDFrameworkVersionNumber;
 
-    @IBAction func loginButtonDidTouch() {
-        dismiss(animated: true) {
-            TDServices.shared.login(withUserName: "userNameLabel", password: "passLabel")
-            debugPrint("LoginViewController dismissed")
-        }
-    }
-}
+//! Project version string for TDFramework.
+FOUNDATION_EXPORT const unsigned char TDFrameworkVersionString[];
