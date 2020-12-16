@@ -27,12 +27,8 @@ class HistoryViewController: UIViewController, UITableViewDataSource, UITableVie
 
         tableView.dataSource = self
         tableView.delegate = self
-    }
-
-    @IBAction func closeButtonDidTouch() {
-        dismiss(animated: true) {
-            debugPrint("HistoryViewController dismissed")
-        }
+        tableView.rowHeight = UITableView.automaticDimension
+        tableView.register(HistoryTableViewCell.nib(), forCellReuseIdentifier: HistoryTableViewCell.id)
     }
 
     // MARK: - UITableViewDataSource
@@ -45,17 +41,14 @@ class HistoryViewController: UIViewController, UITableViewDataSource, UITableVie
     }
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        var cell = tableView.dequeueReusableCell(withIdentifier: "cellReuseIdentifier")
-        if cell == nil {
-            cell = UITableViewCell(style: .subtitle, reuseIdentifier: "cellReuseIdentifier")
-        }
-        guard let event = history?[indexPath.row], let type = event.keys.first, let infor = event.values.first else { return cell! }
-
-        cell!.imageView?.image = UIImage(named: "login-icon")
-        cell!.textLabel?.text = type
-        cell!.detailTextLabel?.text = infor
-
-        return cell!
+        let cell = tableView.dequeueReusableCell(withIdentifier: HistoryTableViewCell.id, for: indexPath)
+        guard let event = history?[indexPath.row], let type = event.keys.first, let infor = event.values.first else { return cell }
+        guard let historyCell = cell as? HistoryTableViewCell else { return cell }
+        
+        historyCell.titleLabel.text = type
+        historyCell.descriptionLabel.text = infor
+        
+        return cell
     }
 
     /*

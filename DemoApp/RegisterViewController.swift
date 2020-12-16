@@ -17,17 +17,28 @@ import UIKit
 import TDFramework
 
 class RegisterViewController: UIViewController {
+    @IBOutlet weak var usernameTextField: UITextField!
+    @IBOutlet weak var passwordTextField: UITextField!
+    @IBOutlet weak var registerButton: UIButton!
 
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        // Do any additional setup after loading the view.
+        
+        registerButton.isUserInteractionEnabled = false
+        NotificationCenter.default.addObserver(self, selector: #selector(self.textFieldDidChange(notification:)), name: UITextField.textDidChangeNotification, object: nil)
     }
 
     @IBAction func registerButtonDidTouch() {
         dismiss(animated: true) {
-            TDServices.shared.registerAccout(withUserName: "userNameLabel", password: "passLabel")
+            TDServices.shared.registerAccout(withUserName: self.usernameTextField.text!, password: self.passwordTextField.text!)
             debugPrint("RegisterViewController dismissed")
         }
+    }
+
+    @objc func textFieldDidChange(notification: Notification) {
+        let userName = usernameTextField.text ?? ""
+        let pass = passwordTextField.text ?? ""
+        
+        registerButton.isUserInteractionEnabled = !userName.isEmpty && !pass.isEmpty
     }
 }

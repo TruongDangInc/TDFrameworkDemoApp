@@ -14,12 +14,24 @@
 //
 
 import UIKit
+import TDFramework
 
 class MainViewController: UIViewController {
+    @IBOutlet weak var registerButton: UIButton!
+    @IBOutlet weak var loginButton: UIButton!
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        // Do any additional setup after loading the view.
+        
+        loginButton.layer.borderWidth = 1
+        loginButton.layer.borderColor = #colorLiteral(red: 1, green: 1, blue: 1, alpha: 1)
+        loginButton.layer.cornerRadius = 6
+        loginButton.layer.masksToBounds = true
+        
+        registerButton.layer.borderWidth = 1
+        registerButton.layer.borderColor = #colorLiteral(red: 1, green: 1, blue: 1, alpha: 1)
+        registerButton.layer.cornerRadius = 6
+        registerButton.layer.masksToBounds = true
     }
 
     @IBAction func registerButtonDidTouch() {
@@ -35,6 +47,12 @@ class MainViewController: UIViewController {
     @IBAction func historyButtonDidTouch() {
         performSegue(withIdentifier: "presentHistoryViewController", sender: self)
     }
+
+    @IBAction func logoutButtonDidTouch() {
+        TDServices.shared.logout()
+    }
+
+    @IBAction func unwindToMainViewController( _ seg: UIStoryboardSegue) {}
 
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         debugPrint("present \(segue.destination.debugDescription)")
