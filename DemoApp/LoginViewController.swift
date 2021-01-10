@@ -34,7 +34,7 @@ class LoginViewController: UIViewController {
 
     @IBAction func loginButtonDidTouch() {
         dismiss(animated: true) {
-            TDServices.shared.login(withUserName: self.usernameTextField.text!, password: self.passwordTextField.text!)
+            TDServices.shared.login(withName: self.usernameTextField.text!, password: self.passwordTextField.text!)
             debugPrint("LoginViewController dismissed")
         }
     }

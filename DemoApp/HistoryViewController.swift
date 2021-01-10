@@ -37,16 +37,17 @@ class HistoryViewController: UIViewController, UITableViewDataSource, UITableVie
     }
 
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return history?.count ?? 0
+        return history.count
     }
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: HistoryTableViewCell.id, for: indexPath)
-        guard let event = history?[indexPath.row], let type = event.keys.first, let infor = event.values.first else { return cell }
+        let event = history[indexPath.row]
+        
         guard let historyCell = cell as? HistoryTableViewCell else { return cell }
         
-        historyCell.titleLabel.text = type
-        historyCell.descriptionLabel.text = infor
+        historyCell.titleLabel.text = event.type.rawValue
+        historyCell.descriptionLabel.text = event.message
         
         return cell
     }

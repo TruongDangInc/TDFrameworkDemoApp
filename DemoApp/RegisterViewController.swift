@@ -30,7 +30,7 @@ class RegisterViewController: UIViewController {
 
     @IBAction func registerButtonDidTouch() {
         dismiss(animated: true) {
-            TDServices.shared.registerAccout(withUserName: self.usernameTextField.text!, password: self.passwordTextField.text!)
+            TDServices.shared.registerAccout(withName: self.usernameTextField.text!, password: self.passwordTextField.text!)
             debugPrint("RegisterViewController dismissed")
         }
     }
